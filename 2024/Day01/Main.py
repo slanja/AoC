@@ -7,12 +7,10 @@ with open("input.txt", "r") as f:
         input.append(line.rstrip())
 
 # initializing empty lists
-first_number = list()
-second_number = list()
+first_number, second_number = list(), list()
 
 # creating variables for results
-sum = 0
-similarity = 0
+distance, similarity = 0, 0
 
 # reading input line by line
 for line in input:
@@ -24,18 +22,15 @@ for line in input:
 first_number.sort()
 second_number.sort()
 
-# counting distance between two lists
 for i in range(len(input)):
-    if second_number[i] - first_number[i] >= 0:
-        sum += second_number[i] - first_number[i]
-    else:
-        sum += first_number[i] - second_number[i]
-
-#=== PART 2 ===
-# counting how many times has number appeared in second_number list and multiplying it by first_number
-for i in range(len(input)):
+    # counting distance between two lists
+    distance += abs(first_number[i] - second_number[i])
+    # === PART 2 ===
+    # counting how many times has number appeared in second_number list and multiplying it by first_number
     similarity += first_number[i] * second_number.count(first_number[i])
 
 # printing results
-print("Total distance between lists: " + str(sum))
+print("Total distance between lists: " + str(distance))
 print("Similarity score: " + str(similarity))
+
+f.close()
